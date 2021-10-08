@@ -1,0 +1,23 @@
+.Planet{
+
+    font-size: 2rem;
+    font-weight: bold;
+
+    .namediv {
+
+        display: flex;
+        align-items: center;
+        
+        .circle{
+            height: 2rem;
+            width: 2rem;
+            border-radius: 1rem;
+            display: inline-block;
+        }
+    
+        .title {
+            margin-left: 0.5rem;
+        }
+    }
+
+}

@@ -1,0 +1,27 @@
+.Sun{
+    color: black;
+    height: 60rem;
+    width: 60rem;
+    border-radius: 30rem;
+
+    margin-top: -50rem;
+
+    display: grid;
+
+    .details {
+        place-self: end center;
+        font-weight: bold;
+        font-size: 2rem;
+        margin-bottom: 3rem;
+
+        display: flex;
+        flex-direction: column;
+
+        span{
+            margin: 0;
+            line-height: 2rem;
+        }
+
+    }
+
+}
