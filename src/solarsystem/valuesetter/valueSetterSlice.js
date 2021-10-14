@@ -4,7 +4,7 @@ export const valueSetterSlice = createSlice({
 
     name: 'valueSetter',
     initialState: {
-        cardShowing: true
+        cardShowing: false
     },
     reducers: {
         showCard: state => {

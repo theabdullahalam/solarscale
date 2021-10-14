@@ -22,7 +22,6 @@ function Planet(props){
     })
 
     let openSetterCard = e => {
-        console.log('woohoo');
         dispatch(showCard())
     }
 
