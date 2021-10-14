@@ -1,0 +1,83 @@
+.SetterCardBackground.invisible{
+    display: none;
+}
+
+.SetterCardBackground.visible{
+
+    position: fixed;
+    margin: 0;
+    padding: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background: rgba(0, 0, 0, 0.781);
+    z-index: 5;
+
+    display: grid;
+
+    .SetterCard{
+
+        background: rgb(23, 28, 31);
+        place-self: center center;
+        border: 1px solid white;
+        padding: 1.5rem;
+        border-radius: 1rem;
+        font-size: 1.2rem;
+        font-weight: bold;
+        min-width: 30%;
+
+        .inputform{
+
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+
+            label {
+                margin-top: 1.5rem;
+            }
+
+            input {
+                background: rgba(0, 0, 0, 0);
+                color: white;
+                border: 2px solid white;
+                border-radius: 0.5rem;
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+                font-weight: bold;
+            }
+
+        }
+
+        .buttons {
+
+            margin-top: 2rem;
+            display: flex;
+            justify-content: flex-end;
+
+            button {
+                background: rgba(0, 0, 0, 0);
+                color: white;
+                border: 2px solid white;
+                margin-left: 0.5rem;
+                border-radius: 0.5rem;
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+                padding-left: 1rem;
+                padding-right: 1rem;
+                font-weight: bold;
+                transition: background 0.1s, color 0.1s;
+            }
+
+            button:hover{
+                background: white;
+                color: rgba(0, 0, 0, 0.795);
+                cursor: pointer;
+            }
+
+        }
+    }
+
+}
