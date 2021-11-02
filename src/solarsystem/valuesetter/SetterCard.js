@@ -1,8 +1,17 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+
+import { getSensibleUnits } from '../unitHelper'
 
 import {
     selectCardState,
-    hideCard
+    selectPTitle,
+    selectPRadius,
+    selectPDistance,
+    selectPGap,
+    hideCard,
+    setPRadius,
+    setPDistance,
+    setPGap
 } from './valueSetterSlice'
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -20,9 +29,10 @@ function SetterCard(props){
         setterCardClass = 'invisible'
     }
 
-    let [radius, setRadius] = useState(0)
-    let [sunDistance, setSunDistance] = useState(0)
-    let [gap, setGap] = useState(0)
+    const p_title = useSelector(selectPTitle)
+    const p_radius = useSelector(selectPRadius)
+    const p_distance = useSelector(selectPDistance)
+    const p_gap = useSelector(selectPGap)
 
     let hideTheCard = e => {
         e.preventDefault()
@@ -33,17 +43,84 @@ function SetterCard(props){
 
     let updateRadius = e => {
         e.preventDefault()
-        setRadius(e.target.value)
+        dispatch(setPRadius(e.target.value))
     }
 
     let updateSunDistance = e => {
         e.preventDefault()
-        setSunDistance(e.target.value)
+        dispatch(setPDistance(e.target.value))
     }
 
     let updateGap = e => {
         e.preventDefault()
-        setGap(e.target.value)
+        dispatch(setPGap(e.target.value))
+    }
+
+    let updateUnitDropdowns = () => {
+        let inputRows = Array.from(document.getElementsByClassName('inputRow'));
+        inputRows.forEach(ir => {
+            if (ir.classList.contains('radiusInput')){
+                let options = Array.from(ir.lastChild.children);
+                options.forEach(op => {
+                    if (op.value === p_radius.unit.toLowerCase()){
+                        op.setAttribute('selected', '')
+                    }else{
+                        op.removeAttribute('selected')
+                    }
+                })
+            }
+        });
+    }
+
+    updateUnitDropdowns()
+
+    let optionSelected = e => {
+        e.preventDefault()
+        let clickedName = e.target.dataset.btnName;
+        let buttons = Array.from(e.currentTarget.parentNode.children);
+
+        // SELECT THE RIGHT BUTTON
+        buttons.forEach(btn => {
+            if (btn.dataset.btnName === clickedName){
+                btn.classList.add("selected")
+            }else{
+                btn.classList.remove("selected")
+            }
+        })
+
+        // SHOW/HIDE THE APPROPRIATE ROW
+        let inputRows = Array.from(document.getElementsByClassName('inputRow'));
+        inputRows.forEach(ir => {
+            // radius
+            if (ir.classList.contains('radiusInput')){
+                if (clickedName === 'radiusButton'){
+                    ir.classList.add('visible');
+                }else{
+                    ir.classList.remove('visible');
+                }
+            }
+
+            // distance
+            if (ir.classList.contains('distanceInput')){
+                if (clickedName === 'distanceButton'){
+                    ir.classList.add('visible');
+                }else{
+                    ir.classList.remove('visible');
+                }
+            }
+
+            // gap
+            if (ir.classList.contains('gapInput')){
+                if (clickedName === 'gapButton'){
+                    ir.classList.add('visible');
+                }else{
+                    ir.classList.remove('visible');
+                }
+            }
+
+
+        })
+
     }
 
     let circleColorStyle = {
@@ -58,31 +135,74 @@ function SetterCard(props){
             <div className="SetterCard">
                 <div className="namediv">
                     <div className="circle" style={circleColorStyle}></div>
-                    <span className="title">VENUS</span>
+                    <span className="title">{p_title}</span>
                 </div>
+
+
+
+                <div className="optionRow">
+                    <button className="selected" data-btn-name="radiusButton" onClick={optionSelected}>RADIUS</button>
+                    <button data-btn-name="distanceButton" onClick={optionSelected}>DISTANCE FROM SUN</button>
+                    <button data-btn-name="gapButton" onClick={optionSelected}>DISTANCE FROM MERCURY</button>
+                </div>
+
+
+
 
                 <form className="inputform">
 
-                    <label>RADIUS</label>
-                    <input
-                        value={radius}
-                        onChange={updateRadius}
-                        type="text"
-                    ></input>
 
-                    <label>DISTANCE FROM SUN</label>
-                    <input
-                        value={sunDistance}
-                        onChange={updateSunDistance}
-                        type="text"
-                    ></input>
+                    {/* RADIUS */}
+                    <div className="inputRow visible radiusInput">
 
-                    <label>DISTANCE FROM MERCURY</label>
-                    <input
-                        value={gap}
-                        onChange={updateGap}
-                        type="text"
-                    ></input>
+                        <input
+                            value={p_radius.value}
+                            onChange={updateRadius}
+                            type="text"
+                        ></input>
+                        <select>
+                            <option value="km">KM</option>
+                            <option value="m">M</option>
+                            <option value="cm">CM</option>
+                            <option value="mm">MM</option>
+                        </select>
+
+                    </div>
+
+
+                    {/* DISTANCE */}
+                    <div className="inputRow distanceInput">
+
+                        <input
+                            value={p_distance}
+                            onChange={updateSunDistance}
+                            type="text"
+                        ></input>
+                        <select>
+                            <option value="km">KM</option>
+                            <option value="m">M</option>
+                            <option value="cm">CM</option>
+                            <option value="mm">MM</option>
+                        </select>
+
+                    </div>
+
+                    {/* GAP */}
+                    <div className="inputRow gapInput">
+
+                        <input
+                            value={p_gap}
+                            onChange={updateGap}
+                            type="text"
+                        ></input>
+                        <select>
+                            <option value="km">KM</option>
+                            <option value="m">M</option>
+                            <option value="cm">CM</option>
+                            <option value="mm">MM</option>
+                        </select>
+
+                    </div>
 
                 </form>
 

@@ -22,7 +22,7 @@ function getComponentsFromBodies(bodies){
             bodyComponents.push(<Sun title={body.p_title} radius={body.p_radius} color={body.p_color} />)
         }else {
             bodyComponents.push(<Gap distance={body.p_distance} gap={body.p_gap} />)
-            bodyComponents.push(<Planet title={body.p_title} color={body.p_color} radius={body.p_radius} />)
+            bodyComponents.push(<Planet title={body.p_title} color={body.p_color} radius={body.p_radius} bodyobj={body} />)
         }      
     });
     return bodyComponents

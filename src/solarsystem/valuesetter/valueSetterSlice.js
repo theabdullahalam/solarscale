@@ -4,7 +4,14 @@ export const valueSetterSlice = createSlice({
 
     name: 'valueSetter',
     initialState: {
-        cardShowing: false
+        cardShowing: false,
+        p_title: '',
+        p_radius: {
+            value: 0,
+            unit: 'cm'
+        },
+        p_distance: 0,
+        p_gap: 0
     },
     reducers: {
         showCard: state => {
@@ -12,13 +19,36 @@ export const valueSetterSlice = createSlice({
         },
         hideCard: state => {
             state.cardShowing = false
-        }        
+        },
+        setPTitle: (state, action) => {
+            state.p_title = action.payload
+        },
+        setPRadius: (state, action) => {
+            state.p_radius = action.payload
+        },
+        setPDistance: (state, action) => {
+            state.p_distance = action.payload
+        },
+        setPGap: (state, action) => {
+            state.p_gap = action.payload
+        }
     }
 
 })
 
-export const {showCard, hideCard} = valueSetterSlice.actions
+export const {
+    showCard, 
+    hideCard,
+    setPTitle,
+    setPRadius,
+    setPDistance,
+    setPGap
+} = valueSetterSlice.actions
 
 export const selectCardState = state => state.valuesetter.cardShowing
+export const selectPTitle = state => state.valuesetter.p_title
+export const selectPRadius = state => state.valuesetter.p_radius
+export const selectPDistance = state => state.valuesetter.p_distance
+export const selectPGap = state => state.valuesetter.p_gap
 
 export default valueSetterSlice.reducer

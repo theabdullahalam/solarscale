@@ -27,27 +27,77 @@
         font-weight: bold;
         min-width: 30%;
 
+        .optionRow{
+
+            display: flex;
+            margin-top: 2rem;
+
+            button{
+                flex-grow: 1;
+                background: rgba(0, 0, 0, 0);
+                border: 1px solid rgba(255, 255, 255, 0.185);
+                color: white;
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+                font-weight: bold;
+                transition: background 0.1s, color 0.1s;
+            }
+
+            button.selected {
+                border: 1px solid white;
+            }
+    
+            button:hover {
+                background: white;
+                color: rgba(0, 0, 0, 0.795);
+                cursor: pointer;
+            }
+
+        }
+
         .inputform{
 
             margin-top: 1rem;
             display: flex;
             flex-direction: column;
 
-            label {
-                margin-top: 1.5rem;
+            .inputRow{
+
+                display: none;
+
+                input {
+                    background: rgba(0, 0, 0, 0);
+                    color: white;
+                    border: 2px solid white;
+                    border-radius: 0.5rem;
+                    padding-top: 0.5rem;
+                    padding-bottom: 0.5rem;
+                    padding-left: 0.5rem;
+                    padding-right: 0.5rem;
+                    font-weight: bold;
+                    flex-grow: 1;
+                }
+
+                select {
+                    background: rgba(0, 0, 0, 0);
+                    color: white;
+                    border: 2px solid white;
+                    border-radius: 0.5rem;
+                    padding-top: 0.5rem;
+                    padding-bottom: 0.5rem;
+                    padding-left: 0.5rem;
+                    padding-right: 0rem;
+                    margin-left: 1rem;
+                    font-weight: bold;
+                    cursor: pointer;
+                }
             }
 
-            input {
-                background: rgba(0, 0, 0, 0);
-                color: white;
-                border: 2px solid white;
-                border-radius: 0.5rem;
-                padding-top: 0.5rem;
-                padding-bottom: 0.5rem;
-                padding-left: 0.5rem;
-                padding-right: 0.5rem;
-                font-weight: bold;
+            .inputRow.visible {
+                display: flex;
             }
+
+            
 
         }
 

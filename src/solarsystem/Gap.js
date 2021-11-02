@@ -30,7 +30,7 @@ function Gap(props){
     }
 
     return (
-        <div className="Gap" onClick={openSetterCard}>
+        <div className="Gap">
             <FontAwesomeIcon icon={faArrowUp} className="arrow"/>
             <span>GAP: {sensibleGap.value} {sensibleGap.unit}</span>
             <span>DISTANCE FROM SUN: {sensibleDistance.value} {sensibleDistance.unit}</span>

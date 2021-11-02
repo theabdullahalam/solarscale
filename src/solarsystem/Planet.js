@@ -5,7 +5,11 @@ import { getSensibleUnits } from './unitHelper'
 
 import {
     showCard,
-    selectCardState
+    selectCardState,
+    setPTitle,
+    setPRadius,
+    setPDistance,
+    setPGap
 } from './valuesetter/valueSetterSlice'
 
 function Planet(props){
@@ -22,6 +26,10 @@ function Planet(props){
     })
 
     let openSetterCard = e => {
+        dispatch(setPRadius(sensibleSize))
+        dispatch(setPDistance(props.bodyobj.p_distance))
+        dispatch(setPGap(props.bodyobj.p_gap))
+        dispatch(setPTitle(props.title))
         dispatch(showCard())
     }
 
