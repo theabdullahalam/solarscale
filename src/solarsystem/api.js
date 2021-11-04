@@ -14,3 +14,17 @@ export const fetchDefaultPlanets = () => {
 
     })
 }
+
+export const fetchBySize = (planetobj) => {
+    return new Promise((resolve, reject) => {
+
+        axios.get(`${config.host}/api/getfromsize`, {params: planetobj})
+            .then(response => {
+                resolve(response.data)
+            })
+            .catch(error => {
+                reject('Unknown Error')
+            })
+
+    })
+}

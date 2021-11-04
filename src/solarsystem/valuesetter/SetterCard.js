@@ -16,6 +16,10 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 
 import './SetterCard.scss'
+import { get_previous_planet } from '../helpers';
+import { fetchBySize } from '../api';
+import { setBodies } from '../solarSystemSlice';
+import convert from 'convert-units';
 
 function SetterCard(props){
 
@@ -33,6 +37,7 @@ function SetterCard(props){
     const p_radius = useSelector(selectPRadius)
     const p_distance = useSelector(selectPDistance)
     const p_gap = useSelector(selectPGap)
+    const p_previous_title = get_previous_planet(p_title)
 
     let hideTheCard = e => {
         e.preventDefault()
@@ -43,22 +48,57 @@ function SetterCard(props){
 
     let updateRadius = e => {
         e.preventDefault()
-        dispatch(setPRadius(e.target.value))
+        dispatch(setPRadius({
+            ...p_radius,
+            value: e.target.value
+        }))
+    }
+
+    let updateRaduisUnit = e => {
+        e.preventDefault()
+        dispatch(setPRadius({
+            ...p_radius,
+            unit: e.target.value
+        }))
     }
 
     let updateSunDistance = e => {
         e.preventDefault()
-        dispatch(setPDistance(e.target.value))
+        dispatch(setPDistance({
+            ...p_distance,
+            value: e.target.value
+        }))
+    }
+
+    let updateDistanceUnit = e => {
+        e.preventDefault()
+        dispatch(setPDistance({
+            ...p_distance,
+            unit: e.target.value
+        }))
     }
 
     let updateGap = e => {
         e.preventDefault()
-        dispatch(setPGap(e.target.value))
+        dispatch(setPGap({
+            ...p_gap,
+            value: e.target.value
+        }))
+    }
+
+    let updateGapUnit = e => {
+        e.preventDefault()
+        dispatch(setPGap({
+            ...p_gap,
+            unit: e.target.value
+        }))
     }
 
     let updateUnitDropdowns = () => {
         let inputRows = Array.from(document.getElementsByClassName('inputRow'));
         inputRows.forEach(ir => {
+
+            // RADIUS
             if (ir.classList.contains('radiusInput')){
                 let options = Array.from(ir.lastChild.children);
                 options.forEach(op => {
@@ -68,6 +108,28 @@ function SetterCard(props){
                         op.removeAttribute('selected')
                     }
                 })
+
+            // DISTANCE
+            } else if (ir.classList.contains('distanceInput')){
+                let options = Array.from(ir.lastChild.children);
+                options.forEach(op => {
+                    if (op.value === p_distance.unit.toLowerCase()){
+                        op.setAttribute('selected', '')
+                    }else{
+                        op.removeAttribute('selected')
+                    }
+                })
+
+            // GAP
+            }else if (ir.classList.contains('gapInput')){
+                let options = Array.from(ir.lastChild.children);
+                options.forEach(op => {
+                    if (op.value === p_gap.unit.toLowerCase()){
+                        op.setAttribute('selected', '')
+                    }else{
+                        op.removeAttribute('selected')
+                    }
+                })            
             }
         });
     }
@@ -123,6 +185,28 @@ function SetterCard(props){
 
     }
 
+
+
+    let updateBodies = e => {
+        dispatch(hideCard())
+
+        let pobj = {
+            object: p_title,
+            radius: convert(p_radius.value).from(p_radius.unit.toLowerCase()).to('cm')
+        }
+
+        fetchBySize(pobj).then(
+            data => {
+                let bodies = data.bodies
+                bodies.sort((a,b)=>{
+                    return a.p_position - b.p_position
+                })
+                dispatch(setBodies(bodies))
+            }
+        )
+
+    }
+
     let circleColorStyle = {
         backgroundColor: props.color
     }
@@ -143,7 +227,7 @@ function SetterCard(props){
                 <div className="optionRow">
                     <button className="selected" data-btn-name="radiusButton" onClick={optionSelected}>RADIUS</button>
                     <button data-btn-name="distanceButton" onClick={optionSelected}>DISTANCE FROM SUN</button>
-                    <button data-btn-name="gapButton" onClick={optionSelected}>DISTANCE FROM MERCURY</button>
+                    <button data-btn-name="gapButton" onClick={optionSelected}>DISTANCE FROM {p_previous_title}</button>
                 </div>
 
 
@@ -160,7 +244,7 @@ function SetterCard(props){
                             onChange={updateRadius}
                             type="text"
                         ></input>
-                        <select>
+                        <select onChange={updateRaduisUnit}>
                             <option value="km">KM</option>
                             <option value="m">M</option>
                             <option value="cm">CM</option>
@@ -174,11 +258,11 @@ function SetterCard(props){
                     <div className="inputRow distanceInput">
 
                         <input
-                            value={p_distance}
+                            value={p_distance.value}
                             onChange={updateSunDistance}
                             type="text"
                         ></input>
-                        <select>
+                        <select onChange={updateDistanceUnit}>
                             <option value="km">KM</option>
                             <option value="m">M</option>
                             <option value="cm">CM</option>
@@ -191,11 +275,11 @@ function SetterCard(props){
                     <div className="inputRow gapInput">
 
                         <input
-                            value={p_gap}
+                            value={p_gap.value}
                             onChange={updateGap}
                             type="text"
                         ></input>
-                        <select>
+                        <select onChange={updateGapUnit}>
                             <option value="km">KM</option>
                             <option value="m">M</option>
                             <option value="cm">CM</option>
@@ -208,7 +292,7 @@ function SetterCard(props){
 
                 <div className="buttons">
                     <button onClick={hideTheCard} className="cancelbutton">CANCEL</button>
-                    <button>SET</button>
+                    <button onClick={updateBodies}>SET</button>
                 </div>
 
             </div>

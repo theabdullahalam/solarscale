@@ -25,10 +25,20 @@ function Planet(props){
         unit: 'cm'
     })
 
+    let sensibleDistance = getSensibleUnits({
+        value: props.bodyobj.p_distance,
+        unit: 'cm'
+    })
+
+    let sensibleGap = getSensibleUnits({
+        value: props.bodyobj.p_gap,
+        unit: 'cm'
+    })
+
     let openSetterCard = e => {
         dispatch(setPRadius(sensibleSize))
-        dispatch(setPDistance(props.bodyobj.p_distance))
-        dispatch(setPGap(props.bodyobj.p_gap))
+        dispatch(setPDistance(sensibleDistance))
+        dispatch(setPGap(sensibleGap))
         dispatch(setPTitle(props.title))
         dispatch(showCard())
     }

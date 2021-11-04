@@ -10,8 +10,14 @@ export const valueSetterSlice = createSlice({
             value: 0,
             unit: 'cm'
         },
-        p_distance: 0,
-        p_gap: 0
+        p_distance: {
+            value: 0,
+            unit: 'cm'
+        },
+        p_gap: {
+            value: 0,
+            unit: 'cm'
+        }
     },
     reducers: {
         showCard: state => {
