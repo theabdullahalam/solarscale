@@ -17,7 +17,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import './SetterCard.scss'
 import { get_previous_planet } from '../helpers';
-import { fetchBySize } from '../api';
+import { fetchByDistance, fetchBySize } from '../api';
 import { setBodies } from '../solarSystemSlice';
 import convert from 'convert-units';
 
@@ -33,6 +33,7 @@ function SetterCard(props){
         setterCardClass = 'invisible'
     }
 
+    const [selectedButton, setSelectedButton] = useState('radiusButton')
     const p_title = useSelector(selectPTitle)
     const p_radius = useSelector(selectPRadius)
     const p_distance = useSelector(selectPDistance)
@@ -138,8 +139,11 @@ function SetterCard(props){
 
     let optionSelected = e => {
         e.preventDefault()
+        
         let clickedName = e.target.dataset.btnName;
+        setSelectedButton(clickedName)
         let buttons = Array.from(e.currentTarget.parentNode.children);
+
 
         // SELECT THE RIGHT BUTTON
         buttons.forEach(btn => {
@@ -188,14 +192,27 @@ function SetterCard(props){
 
 
     let updateBodies = e => {
+
         dispatch(hideCard())
+        let fetcher_method = null
+        let pobj = null
 
-        let pobj = {
-            object: p_title,
-            radius: convert(p_radius.value).from(p_radius.unit.toLowerCase()).to('cm')
+        if (selectedButton === 'radiusButton'){
+            pobj = {
+                object: p_title,
+                radius: convert(p_radius.value).from(p_radius.unit.toLowerCase()).to('cm')
+            }
+            fetcher_method = fetchBySize
+        }else if (selectedButton === 'distanceButton'){
+            pobj = {
+                object: p_title,
+                distance: convert(p_distance.value).from(p_distance.unit.toLowerCase()).to('cm')
+            }
+            fetcher_method = fetchByDistance
         }
+        
 
-        fetchBySize(pobj).then(
+        fetcher_method(pobj).then(
             data => {
                 let bodies = data.bodies
                 bodies.sort((a,b)=>{

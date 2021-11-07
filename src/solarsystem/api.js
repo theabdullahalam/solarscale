@@ -28,3 +28,17 @@ export const fetchBySize = (planetobj) => {
 
     })
 }
+
+export const fetchByDistance = (planetobj) => {
+    return new Promise((resolve, reject) => {
+
+        axios.get(`${config.host}/api/getfromdistance`, {params: planetobj})
+            .then(response => {
+                resolve(response.data)
+            })
+            .catch(error => {
+                reject('Unknown Error')
+            })
+
+    })
+}
