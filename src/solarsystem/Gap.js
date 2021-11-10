@@ -10,20 +10,22 @@ import {
     showCard,
     selectCardState
 } from './valuesetter/valueSetterSlice'
+import { selectUnits } from '../settingscard/settingsSlice'
 
 function Gap(props){
 
     const dispatch = useDispatch()
+    const unitsmode = useSelector(selectUnits)
 
     let sensibleGap = getSensibleUnits({
         value: props.gap,
         unit: 'cm'
-    })
+    }, unitsmode)
 
     let sensibleDistance = getSensibleUnits({
         value: props.distance,
         unit: 'cm'
-    })
+    }, unitsmode)
 
     let openSetterCard = e => {
         dispatch(showCard())
