@@ -42,3 +42,17 @@ export const fetchByDistance = (planetobj) => {
 
     })
 }
+
+export const fetchByGap = (planetobj) => {
+    return new Promise((resolve, reject) => {
+
+        axios.get(`${config.host}/api/getfromgap`, {params: planetobj})
+            .then(response => {
+                resolve(response.data)
+            })
+            .catch(error => {
+                reject('Unknown Error')
+            })
+
+    })
+}

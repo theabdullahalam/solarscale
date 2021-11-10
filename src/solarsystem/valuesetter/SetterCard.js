@@ -17,7 +17,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import './SetterCard.scss'
 import { get_previous_planet } from '../helpers';
-import { fetchByDistance, fetchBySize } from '../api';
+import { fetchByDistance, fetchByGap, fetchBySize } from '../api';
 import { setBodies } from '../solarSystemSlice';
 import convert from 'convert-units';
 
@@ -209,6 +209,12 @@ function SetterCard(props){
                 distance: convert(p_distance.value).from(p_distance.unit.toLowerCase()).to('cm')
             }
             fetcher_method = fetchByDistance
+        }else if(selectedButton === 'gapButton'){
+            pobj = {
+                object: p_title,
+                gap: convert(p_gap.value).from(p_gap.unit.toLowerCase()).to('cm')
+            }
+            fetcher_method = fetchByGap
         }
         
 
