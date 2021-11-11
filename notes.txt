@@ -1,4 +1,5 @@
-the unithelper method is incomplete - it only converts cm into the other units. complete the method.
-settings button stuff
+responsive
+better info with links to other sites
+api documentation
 make server live
 make app live

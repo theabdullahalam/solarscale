@@ -4,6 +4,31 @@
 
     .Planet, .Gap {
         margin-left: 25rem;
+
+        @media screen and (max-width: 1450px) {
+            margin-left: 20rem;
+        }
+
+        @media screen and (max-width: 1170px) {
+            margin-left: 15rem;
+        }
+
+        @media screen and (max-width: 950px) {
+            margin-left: 12rem;
+        }
+
+        @media screen and (max-width: 920px) {
+            margin-left: 10rem;
+        }
+
+        @media screen and (max-width: 700px) {
+            margin-left: 8rem;
+        }
+
+        @media screen and (max-width: 500px) {
+            margin-left: 1rem;
+        }
+
     }
 
     padding-bottom: 9rem;

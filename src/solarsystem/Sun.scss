@@ -12,6 +12,30 @@
     margin-left: -1.4rem;
     margin-top: -50rem;
 
+    @media screen and (max-width: 1450px) {
+        margin-left: -6rem;
+    }
+
+    @media screen and (max-width: 1170px) {
+        margin-left: -11rem;
+    }
+
+    @media screen and (max-width: 950px) {
+        margin-left: -14rem;
+    }
+
+    @media screen and (max-width: 920px) {
+        margin-left: -16rem;
+    }
+
+    @media screen and (max-width: 700px) {
+        margin-left: -18rem;
+    }
+
+    @media screen and (max-width: 500px) {
+        margin-left: -25rem;
+    }
+
     display: grid;
 
     .details {

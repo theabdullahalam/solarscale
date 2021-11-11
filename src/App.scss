@@ -1,7 +1,15 @@
 .App{
 
+    * {
+        transition: all 0.25s ease;
+    }
+
     display: grid;
     grid-template-columns: 3fr 2fr;
     grid-template-rows: auto;
+
+    @media screen and (max-width: 1560px) {
+        grid-template-columns: 1fr 1fr;
+    }
 
 }

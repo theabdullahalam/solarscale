@@ -1,7 +1,18 @@
 .InfoCard {
 
-    max-width: 60%;
-    margin-top: 30vh;
+
+    position: fixed;
+    top: 12rem;
+    left: 59.7vw;
+    padding-right: 1rem;
+
+    @media screen and (max-width: 1100px) {
+        top: 12rem
+    }
+
+    @media screen and (max-width: 640px) {
+        top: 12rem
+    }
 
     h1 {
         color: rgba(255, 255, 255, 0.5);
