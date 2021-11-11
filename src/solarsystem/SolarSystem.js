@@ -19,7 +19,7 @@ function getComponentsFromBodies(bodies){
     let bodyComponents = []
     bodies.forEach(body => {
         if (body.p_title === 'SUN'){
-            bodyComponents.push(<Sun title={body.p_title} radius={body.p_radius} color={body.p_color} />)
+            bodyComponents.push(<Sun title={body.p_title} radius={body.p_radius} color={body.p_color} bodyobj={body} />)
         }else {
             bodyComponents.push(<Gap distance={body.p_distance} gap={body.p_gap} />)
             bodyComponents.push(<Planet title={body.p_title} color={body.p_color} radius={body.p_radius} bodyobj={body} />)

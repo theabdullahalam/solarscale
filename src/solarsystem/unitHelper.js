@@ -16,10 +16,10 @@ export const getSensibleUnits = function(unitObj, unitmode = 'metric'){
     if (unitmode === 'metric'){
         if (unit.toLowerCase() === 'cm'){
 
-            if (value > 100000){
+            if (value >= 100000){
                 unit = 'km'
                 value = convert(value).from(unitObj.unit).to(unit)
-            } else if (value > 100) {
+            } else if (value >= 100) {
                 unit = 'm'
                 value = convert(value).from(unitObj.unit).to(unit)
             } else if (value < 1) {
@@ -35,9 +35,9 @@ export const getSensibleUnits = function(unitObj, unitmode = 'metric'){
             unit = 'in'
             let initial_unit = 'in'
 
-            if (value > 63360){
+            if (value >= 63360){
                 unit = 'mi'
-            }else if (value > 12){
+            }else if (value >= 12){
                 unit = 'ft'
             }
 

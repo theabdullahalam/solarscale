@@ -13,6 +13,11 @@ import {
     setPDistance,
     setPGap
 } from './valueSetterSlice'
+
+import {
+    selectSizeMode, selectUnits
+} from '../../settingscard/settingsSlice'
+
 import { useSelector, useDispatch } from 'react-redux';
 
 import './SetterCard.scss'
@@ -24,6 +29,8 @@ import convert from 'convert-units';
 function SetterCard(props){
 
     const dispatch = useDispatch()
+    const sizeMode = useSelector(selectSizeMode)
+    const unitsmode = useSelector(selectUnits)
 
     const showSetterCard = useSelector(selectCardState)
     let setterCardClass    
@@ -99,39 +106,27 @@ function SetterCard(props){
         let inputRows = Array.from(document.getElementsByClassName('inputRow'));
         inputRows.forEach(ir => {
 
-            // RADIUS
+            let p_attribute;
             if (ir.classList.contains('radiusInput')){
-                let options = Array.from(ir.lastChild.children);
-                options.forEach(op => {
-                    if (op.value === p_radius.unit.toLowerCase()){
-                        op.setAttribute('selected', '')
-                    }else{
-                        op.removeAttribute('selected')
-                    }
-                })
-
-            // DISTANCE
+                p_attribute = p_radius
             } else if (ir.classList.contains('distanceInput')){
-                let options = Array.from(ir.lastChild.children);
-                options.forEach(op => {
-                    if (op.value === p_distance.unit.toLowerCase()){
-                        op.setAttribute('selected', '')
-                    }else{
-                        op.removeAttribute('selected')
-                    }
-                })
-
-            // GAP
+                p_attribute = p_distance
             }else if (ir.classList.contains('gapInput')){
-                let options = Array.from(ir.lastChild.children);
-                options.forEach(op => {
-                    if (op.value === p_gap.unit.toLowerCase()){
-                        op.setAttribute('selected', '')
-                    }else{
-                        op.removeAttribute('selected')
-                    }
-                })            
+                p_attribute = p_gap
             }
+
+            let count = 1;
+            let options = Array.from(ir.lastChild.children);
+            options.forEach(op => {
+                if (op.value === p_attribute.unit.toLowerCase()){
+                    op.setAttribute('selected', '')
+                    ir.selectedIndex = count
+                }else{
+                    op.removeAttribute('selected')
+                    count += 1
+                }
+            })
+
         });
     }
 
@@ -197,10 +192,15 @@ function SetterCard(props){
         let fetcher_method = null
         let pobj = null
 
+        // p_radius is a variable that hold the size of the object sent by SolarSystem
+        // it may contain the diameter of the object if that's what is set
+        let theradius = (sizeMode.toLowerCase() === 'radius') ? p_radius.value : p_radius.value/2
+        console.log(theradius);
+
         if (selectedButton === 'radiusButton'){
             pobj = {
                 object: p_title,
-                radius: convert(p_radius.value).from(p_radius.unit.toLowerCase()).to('cm')
+                radius: convert(theradius).from(p_radius.unit.toLowerCase()).to('cm')
             }
             fetcher_method = fetchBySize
         }else if (selectedButton === 'distanceButton'){
@@ -234,6 +234,11 @@ function SetterCard(props){
         backgroundColor: props.color
     }
 
+    let units_to_show;
+    let metric_units = ['mm', 'cm', 'm', 'km']
+    let imperial_units = ['in', 'ft', 'mi']
+    units_to_show = (unitsmode === 'metric') ? metric_units : imperial_units
+
     return (
         <div 
             className={['SetterCardBackground', setterCardClass].join(' ')}
@@ -246,11 +251,11 @@ function SetterCard(props){
                 </div>
 
 
-
+                {/* the visibility class is set to 'bleh' because for whatever reason the word 'invisible' wasn't working */}
                 <div className="optionRow">
-                    <button className="selected" data-btn-name="radiusButton" onClick={optionSelected}>RADIUS</button>
-                    <button data-btn-name="distanceButton" onClick={optionSelected}>DISTANCE FROM SUN</button>
-                    <button data-btn-name="gapButton" onClick={optionSelected}>DISTANCE FROM {p_previous_title}</button>
+                    <button className="selected" data-btn-name="radiusButton" onClick={optionSelected}>{sizeMode.toUpperCase()}</button>
+                    <button data-btn-name="distanceButton" onClick={optionSelected} className={p_title.toUpperCase() === 'SUN' ? 'bleh' : ''}>DISTANCE FROM SUN</button>
+                    <button data-btn-name="gapButton" onClick={optionSelected} className={p_title.toUpperCase() === 'SUN' ? 'bleh' : ''}>DISTANCE FROM {p_previous_title}</button>
                 </div>
 
 
@@ -268,10 +273,9 @@ function SetterCard(props){
                             type="text"
                         ></input>
                         <select onChange={updateRaduisUnit}>
-                            <option value="km">KM</option>
-                            <option value="m">M</option>
-                            <option value="cm">CM</option>
-                            <option value="mm">MM</option>
+                            {
+                                units_to_show.map(u => <option value={u}>{u.toUpperCase()}</option>)
+                            }
                         </select>
 
                     </div>
@@ -286,10 +290,9 @@ function SetterCard(props){
                             type="text"
                         ></input>
                         <select onChange={updateDistanceUnit}>
-                            <option value="km">KM</option>
-                            <option value="m">M</option>
-                            <option value="cm">CM</option>
-                            <option value="mm">MM</option>
+                            {
+                                units_to_show.map(u => <option value={u}>{u.toUpperCase()}</option>)
+                            }
                         </select>
 
                     </div>
@@ -303,10 +306,9 @@ function SetterCard(props){
                             type="text"
                         ></input>
                         <select onChange={updateGapUnit}>
-                            <option value="km">KM</option>
-                            <option value="m">M</option>
-                            <option value="cm">CM</option>
-                            <option value="mm">MM</option>
+                            {
+                                units_to_show.map(u => <option value={u}>{u.toUpperCase()}</option>)
+                            }
                         </select>
 
                     </div>
