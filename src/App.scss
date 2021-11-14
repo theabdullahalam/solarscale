@@ -12,4 +12,53 @@
         grid-template-columns: 1fr 1fr;
     }
 
+    .cornerButtons {
+
+        display: none;
+        cursor: pointer;
+
+        @media screen and (max-width: 800px) {
+            display: initial;
+        }
+    }
+
+    .fa-cog {
+        position: fixed;
+        bottom: 1.5rem;
+        right: 1.5rem;
+        font-size: 2rem;
+    }
+
+    .fa-info-circle {
+        position: fixed;
+        top: 1.5rem;
+        right: 1.5rem;
+        font-size: 2rem;
+
+        
+        @media screen and (max-width: 570px) {
+            color: rgb(151, 170, 182);
+        }
+
+        @media screen and (max-width: 522px) {
+            color: rgb(23, 28, 31);
+        }
+
+        @media screen and (max-width: 500px) {
+            color: rgb(220, 225, 228);
+        }
+        
+        
+        
+        
+        @media screen and (max-width: 452px) {
+            color: rgb(151, 170, 182);
+        }
+
+        @media screen and (max-width: 416px) {
+            color: rgb(23, 28, 31);
+        }
+
+    }
+
 }

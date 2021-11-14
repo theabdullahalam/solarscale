@@ -5,13 +5,14 @@
     top: 12rem;
     left: 59.7vw;
     padding-right: 1rem;
+    background: rgb(23, 28, 31);
 
     @media screen and (max-width: 1100px) {
         top: 12rem
     }
 
-    @media screen and (max-width: 640px) {
-        top: 12rem
+    @media screen and (max-width: 800px) {
+        display: none;
     }
 
     h1 {
@@ -24,5 +25,23 @@
         font-size: 1.1rem;
         font-family: 'Josefin Sans', sans-serif;
         line-height: 1.5rem;
+    }
+}
+
+.InfoCard.floating {
+    @media screen and (max-width: 800px) {
+
+        border: 1px solid white;
+        border-radius: 1rem;
+        padding: 1.5rem;
+
+        display: initial;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        width: 80vw;
+
     }
 }

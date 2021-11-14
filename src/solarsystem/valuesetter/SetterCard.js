@@ -251,7 +251,7 @@ function SetterCard(props){
                 </div>
 
 
-                {/* the visibility class is set to 'bleh' because for whatever reason the word 'invisible' wasn't working */}
+                {/* the visibility class is 'bleh' because the word 'invisible' wasn't working for some reason even though it's just a string -_- */}
                 <div className="optionRow">
                     <button className="selected" data-btn-name="radiusButton" onClick={optionSelected}>{sizeMode.toUpperCase()}</button>
                     <button data-btn-name="distanceButton" onClick={optionSelected} className={p_title.toUpperCase() === 'SUN' ? 'bleh' : ''}>DISTANCE FROM SUN</button>

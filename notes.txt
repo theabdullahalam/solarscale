@@ -1,4 +1,5 @@
-responsive
+    responsive
+error handling
 better info with links to other sites
 api documentation
 make server live
