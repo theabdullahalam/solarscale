@@ -188,6 +188,11 @@ function SetterCard(props){
 
     let updateBodies = e => {
 
+        // SHOW THE LOADER
+        let loader = document.getElementsByClassName('loadergif')[0]
+        loader.classList.remove('hidden')
+
+        // hide the card
         dispatch(hideCard())
         let fetcher_method = null
         let pobj = null
@@ -216,17 +221,27 @@ function SetterCard(props){
             }
             fetcher_method = fetchByGap
         }
+
+
+
+        // clear planets
+        dispatch(setBodies([]))
         
 
-        fetcher_method(pobj).then(
+        fetcher_method(pobj)
+        .then(
             data => {
                 let bodies = data.bodies
                 bodies.sort((a,b)=>{
                     return a.p_position - b.p_position
                 })
                 dispatch(setBodies(bodies))
+                loader.classList.add('hidden')
             }
         )
+        .catch(err => {
+            console.log('Oops');
+        })
 
     }
 

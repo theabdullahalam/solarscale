@@ -37,12 +37,16 @@
     }
 
     display: grid;
+    grid-template-columns: 3fr 4fr;
 
     .details {
-        place-self: end center;
+
+        grid-column: 2/3;
+        place-self: end start;
         font-weight: bold;
         font-size: 2rem;
         margin-bottom: 3rem;
+        text-align: left;
 
         display: flex;
         flex-direction: column;

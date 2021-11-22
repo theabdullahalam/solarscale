@@ -2,6 +2,17 @@
     display: flex;
     flex-direction: column;
 
+    .loadergif{
+        position: fixed;
+        top: 45vh;
+        left: 25vw;
+        height: 5rem;
+    }
+
+    .loadergif.hidden {
+        display: none;
+    }
+
     .Planet, .Gap {
         margin-left: 25rem;
 

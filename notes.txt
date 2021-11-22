@@ -1,5 +1,6 @@
     responsive
-sun text alignment
+    sun text alignment
+    
 error handling
 better info with links to other sites
 api documentation

@@ -1,4 +1,5 @@
 import './SolarSystem.scss'
+import loader from '../loader10.gif'
 
 import {useSelector, useDispatch} from 'react-redux'
 import { useState, useEffect } from 'react'
@@ -31,22 +32,31 @@ function getComponentsFromBodies(bodies){
 
 function SolarSystem(props){
 
+    console.log(loader);
+
     const bodies = useSelector(selectBodies)
     const dispatch = useDispatch()
 
     // FETCH INITIAL
     useEffect(()=>{
-        fetchDefaultPlanets().then(data=>{
+        fetchDefaultPlanets()
+        .then(data=>{
             let bodies = data.bodies
             bodies.sort((a,b)=>{
                 return a.p_position - b.p_position
             })
             dispatch(setBodies(bodies))
-        })        
+            let loader = document.getElementsByClassName('loadergif')[0]
+            loader.classList.add('hidden')
+        })
+        .catch(error => {
+            console.log('Oops');
+        })
     }, [])
 
     return (
         <div className="SolarSystem">
+            <img src={loader} className="loadergif" />
             {getComponentsFromBodies(bodies)}
         </div>
     )
