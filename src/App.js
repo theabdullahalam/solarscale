@@ -14,30 +14,27 @@ function App() {
   const [settingsCardState, setSettingsCardState] = useState(true)
   const [infoCardState, setinfoCardState] = useState(true)
 
-  let toggleSettingsCard = e => {
+  let showSettingsCard = e => {
 
-    setSettingsCardState(!settingsCardState)
     let settingsCard = document.getElementsByClassName('SettingsCard')[0]
+    let settingsBg = document.getElementsByClassName('SettingsBg')[0]
 
-    if (settingsCardState){
-      settingsCard.classList.add('floating')
-    } else {
-      settingsCard.classList.remove('floating')
-    }
+    settingsCard.classList.add('floating')
+    settingsBg.classList.remove('invisible')
+    settingsBg.classList.add('visible')
+    
 
   }
 
-  let toggleInfoCard = e => {
-
-    setinfoCardState(!infoCardState)
+  let showInfoCard = e => {
+    
     let infoCard = document.getElementsByClassName('InfoCard')[0]
+    let infoBg = document.getElementsByClassName('InfoBg')[0]
 
-    if (infoCardState){
-      infoCard.classList.add('floating')
-    } else {
-      infoCard.classList.remove('floating')
-    }
-
+    infoCard.classList.add('floating')
+    infoBg.classList.remove('invisible')
+    infoBg.classList.add('visible')
+    
   }
 
   return (
@@ -46,8 +43,8 @@ function App() {
       <SolarSystem />
       <InfoCard />
       <SettingsCard />
-      <FontAwesomeIcon icon={faCog} className="cornerButtons" onClick={toggleSettingsCard}/>
-      <FontAwesomeIcon icon={faInfoCircle} className="cornerButtons" onClick={toggleInfoCard}/>
+      <FontAwesomeIcon icon={faCog} className="cornerButtons" onClick={showSettingsCard}/>
+      <FontAwesomeIcon icon={faInfoCircle} className="cornerButtons" onClick={showInfoCard}/>
     </div>
   );
 }

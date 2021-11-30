@@ -6,6 +6,17 @@ import { setSizeMode, setUnits } from './settingsSlice'
 
 function SettingsCard(props){
 
+    let hideSettingsCard = e => {
+        if (e.target.classList.contains('SettingsBg')){
+            let settingsCard = document.getElementsByClassName('SettingsCard')[0]
+            let settingsBg = document.getElementsByClassName('SettingsBg')[0]
+
+            settingsCard.classList.remove('floating')
+            settingsBg.classList.remove('visible')
+            settingsBg.classList.add('invisible')
+        }        
+    }
+
     let rd_options = [   
         {
             label: 'RADIUS',
@@ -33,10 +44,14 @@ function SettingsCard(props){
     ]
 
     return(
-        <div className="SettingsCard">
-            <h2>settings</h2>
-            <BiSettings title="object size" options={rd_options} />
-            <BiSettings title="units" options={unit_options} />
+        <div className="SettingsBg" onClick={hideSettingsCard}>
+        
+            <div className="SettingsCard">
+                <h2>settings</h2>
+                <BiSettings title="object size" options={rd_options} />
+                <BiSettings title="units" options={unit_options} />
+            </div>
+
         </div>
     )
 }

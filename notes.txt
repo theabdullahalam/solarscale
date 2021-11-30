@@ -9,5 +9,7 @@ better default landing page for api server
     make server live
     make app live
 api documentation
-info icon light on scroll
+    info icon light on scroll
+mobile mode margin for settercard
+mobile mode landscape is weird
 hide info and settings on outside click

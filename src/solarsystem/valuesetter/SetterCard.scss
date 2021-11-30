@@ -27,6 +27,11 @@
         font-weight: bold;
         min-width: 30%;
 
+        @media screen and (max-width: 440px) {
+            margin-left: 1.5rem;
+            margin-right: 1.5rem;
+        }
+
         .optionRow{
 
             display: flex;
