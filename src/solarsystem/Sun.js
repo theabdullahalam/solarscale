@@ -1,8 +1,7 @@
 import './Sun.scss'
 
-// import {useSelector, useDispatch} from 'react-redux'
+import { useEffect } from 'react'
 import { getSensibleUnits } from './unitHelper'
-import { useState } from 'react'
 
 import {useSelector, useDispatch} from 'react-redux'
 
@@ -14,7 +13,6 @@ import {
     showCard,
     setPTitle,
     setPRadius,
-    selectCardState
 } from './valuesetter/valueSetterSlice'
 
 function Sun(props){
@@ -33,6 +31,40 @@ function Sun(props){
         dispatch(setPTitle(props.title))
         dispatch(showCard())
     }
+
+
+
+
+    // mobile info card theme on scroll... stuff...
+    useEffect(()=>{
+        let observer_options = {
+            root: null,
+            threshold: 0.05
+        }
+    
+        let onSunVisible = (entries, observer) => {
+
+            let infobutton = document.getElementsByClassName('fa-info-circle')[0]
+
+            entries.forEach(entry => {
+                if(entry.isIntersecting){
+                    infobutton.classList.remove('light')
+                }else{
+                    infobutton.classList.add('light')
+                }
+            })
+        }
+    
+        let observer = new IntersectionObserver(onSunVisible, observer_options)
+        let sunelement = document.getElementsByClassName('Sun')[0]
+        observer.observe(sunelement)
+        
+    }, [])
+    
+    
+
+
+
 
     return (
         <div className="Sun" style={{backgroundColor: props.color}} onClick={openSetterCard}>

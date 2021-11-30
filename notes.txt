@@ -1,8 +1,13 @@
     responsive
-    sun text alignment
-    
-error handling
-better info with links to other sites
+    sun text alignment    
+    error handling
+    loading gif in redux
+    error informing
+    seperate config in server
+    cleanup unused imports
+better default landing page for api server
+    make server live
+    make app live
 api documentation
-make server live
-make app live
+info icon light on scroll
+hide info and settings on outside click

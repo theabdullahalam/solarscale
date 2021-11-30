@@ -1,0 +1,25 @@
+.Error {
+
+    position: fixed;
+    top: 40vh;
+    left: 23.5vw;
+    max-width: 8rem;
+    display: grid;
+
+    @media screen and (max-width: 800px){
+        left: 26vw;
+    }
+
+    p {
+        font-weight: bold;
+        font-size: 2rem;
+        text-align: center;
+        place-self: center center;
+
+        @media screen and (max-width: 800px){
+            text-align: left;
+        }
+
+    }
+
+}

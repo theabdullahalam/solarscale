@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.scss';
 
 import SolarSystem from './solarsystem/SolarSystem';

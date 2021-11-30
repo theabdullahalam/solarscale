@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react'
-
-import { getSensibleUnits } from '../unitHelper'
+import { useState } from 'react'
 
 import {
     selectCardState,
@@ -13,6 +11,11 @@ import {
     setPDistance,
     setPGap
 } from './valueSetterSlice'
+
+import {
+    setLoading,
+    setError
+} from '../solarSystemSlice'
 
 import {
     selectSizeMode, selectUnits
@@ -34,7 +37,7 @@ function SetterCard(props){
 
     const showSetterCard = useSelector(selectCardState)
     let setterCardClass    
-    if (showSetterCard == true){
+    if (showSetterCard){
         setterCardClass = 'visible'
     }else{
         setterCardClass = 'invisible'
@@ -189,8 +192,9 @@ function SetterCard(props){
     let updateBodies = e => {
 
         // SHOW THE LOADER
-        let loader = document.getElementsByClassName('loadergif')[0]
-        loader.classList.remove('hidden')
+        // let loader = document.getElementsByClassName('loadergif')[0]
+        // loader.classList.remove('hidden')
+        dispatch(setLoading(true))
 
         // hide the card
         dispatch(hideCard())
@@ -236,11 +240,13 @@ function SetterCard(props){
                     return a.p_position - b.p_position
                 })
                 dispatch(setBodies(bodies))
-                loader.classList.add('hidden')
+                dispatch(setLoading(false))
             }
         )
         .catch(err => {
-            console.log('Oops');
+            console.log(err);
+            dispatch(setError('There was an error contacting the server'))
+            dispatch(setLoading(false))
         })
 
     }
@@ -289,7 +295,7 @@ function SetterCard(props){
                         ></input>
                         <select onChange={updateRaduisUnit}>
                             {
-                                units_to_show.map(u => <option value={u}>{u.toUpperCase()}</option>)
+                                units_to_show.map(u => <option value={u} key={u}>{u.toUpperCase()}</option>)
                             }
                         </select>
 
@@ -306,7 +312,7 @@ function SetterCard(props){
                         ></input>
                         <select onChange={updateDistanceUnit}>
                             {
-                                units_to_show.map(u => <option value={u}>{u.toUpperCase()}</option>)
+                                units_to_show.map(u => <option value={u} key={u}>{u.toUpperCase()}</option>)
                             }
                         </select>
 
@@ -322,7 +328,7 @@ function SetterCard(props){
                         ></input>
                         <select onChange={updateGapUnit}>
                             {
-                                units_to_show.map(u => <option value={u}>{u.toUpperCase()}</option>)
+                                units_to_show.map(u => <option value={u} key={u}>{u.toUpperCase()}</option>)
                             }
                         </select>
 

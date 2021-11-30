@@ -1,7 +1,6 @@
 import './SettingsCard.scss'
 
 import BiSettings from './BiSettings'
-import { useDispatch } from 'react-redux'
 import { setSizeMode, setUnits } from './settingsSlice'
 
 

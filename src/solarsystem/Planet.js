@@ -5,7 +5,6 @@ import { getSensibleUnits } from './unitHelper'
 
 import {
     showCard,
-    selectCardState,
     setPTitle,
     setPRadius,
     setPDistance,

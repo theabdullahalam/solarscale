@@ -1,6 +1,3 @@
-import { useSelector } from 'react-redux'
-import { selectUnits } from '../settingscard/settingsSlice'
-
 var convert = require('convert-units')
 
 const roundTo = (num, places) => {

@@ -4,17 +4,12 @@ import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons'
 
 import { getSensibleUnits } from './unitHelper'
 
-import {useSelector, useDispatch} from 'react-redux'
+import {useSelector} from 'react-redux'
 
-import {
-    showCard,
-    selectCardState
-} from './valuesetter/valueSetterSlice'
 import { selectUnits } from '../settingscard/settingsSlice'
 
 function Gap(props){
 
-    const dispatch = useDispatch()
     const unitsmode = useSelector(selectUnits)
 
     let sensibleGap = getSensibleUnits({
@@ -26,10 +21,6 @@ function Gap(props){
         value: props.distance,
         unit: 'cm'
     }, unitsmode)
-
-    let openSetterCard = e => {
-        dispatch(showCard())
-    }
 
     return (
         <div className="Gap">

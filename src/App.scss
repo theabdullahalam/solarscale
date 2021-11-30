@@ -24,15 +24,19 @@
 
     .fa-cog {
         position: fixed;
-        bottom: 1.5rem;
-        right: 1.5rem;
+        bottom: 2.5rem;
+        right: 2.5rem;
         font-size: 2rem;
+    }
+
+    .fa-info-circle.light{
+        color: rgb(220, 225, 228) !important;
     }
 
     .fa-info-circle {
         position: fixed;
-        top: 1.5rem;
-        right: 1.5rem;
+        top: 2.5rem;
+        right: 2.5rem;
         font-size: 2rem;
 
         
