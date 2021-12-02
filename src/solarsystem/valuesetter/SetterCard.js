@@ -58,11 +58,13 @@ function SetterCard(props){
     }
 
     let updateRadius = e => {
-        e.preventDefault()
-        dispatch(setPRadius({
-            ...p_radius,
-            value: e.target.value
-        }))
+        e.preventDefault();
+        if(!isNaN(e.target.value)){
+            dispatch(setPRadius({
+                ...p_radius,
+                value: e.target.value
+            }))
+        }        
     }
 
     let updateRaduisUnit = e => {
@@ -75,10 +77,12 @@ function SetterCard(props){
 
     let updateSunDistance = e => {
         e.preventDefault()
-        dispatch(setPDistance({
-            ...p_distance,
-            value: e.target.value
-        }))
+        if(!isNaN(e.target.value)){
+            dispatch(setPDistance({
+                ...p_distance,
+                value: e.target.value
+            }))
+        }
     }
 
     let updateDistanceUnit = e => {
@@ -91,10 +95,12 @@ function SetterCard(props){
 
     let updateGap = e => {
         e.preventDefault()
-        dispatch(setPGap({
-            ...p_gap,
-            value: e.target.value
-        }))
+        if(!isNaN(e.target.value)){
+            dispatch(setPGap({
+                ...p_gap,
+                value: e.target.value
+            }))
+        }
     }
 
     let updateGapUnit = e => {
