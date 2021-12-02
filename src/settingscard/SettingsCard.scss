@@ -1,4 +1,7 @@
 .SettingsBg.visible{
+
+    border: 2px solid teal;
+
     position: fixed;
     margin: 0;
     padding: 0;
@@ -10,11 +13,14 @@
 }
 
 .SettingsBg.invisible{
-    display: none;
+    visibility: hidden;
 }
 
 .SettingsCard{
 
+    @media screen and (min-width: 800px) {
+        visibility: visible !important;
+    }
     position: fixed;
     border: 1px solid white;
     border-radius: 1rem;

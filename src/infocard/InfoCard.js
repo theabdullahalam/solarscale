@@ -13,8 +13,8 @@ function InfoCard(props){
     }
 
     return(
-        <div className="InfoBg" onClick={hideInfoCard}>
-            <div className="InfoCard">
+        <div className="InfoBg visible" onClick={hideInfoCard}>
+            <div className="InfoCard floating">
                 <h1>solarscale</h1>
                 {/* <p>
                     Calculate Solar System sizes to a scale that you can set. 
